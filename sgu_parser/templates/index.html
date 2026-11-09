@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Где преподаватель? | СГУ</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #2c3e50; }
+        form { margin: 20px 0; }
+        input[type="text"] { padding: 10px; width: 300px; font-size: 16px; }
+        button { padding: 10px 20px; font-size: 16px; background: #3498db; color: white; border: none; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f2f2f2; }
+        .error { color: red; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Где преподаватель?</h1>
+    <p>Введите фамилию преподавателя, чтобы узнать, в каком он кабинете.</p>
+
+    <form method="post">
+        <input type="text" name="name" placeholder="Тыкни лапкой" required>
+        <button type="submit">Найти</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if results %}
+        <h2>Расписание: {{ teacher_name }}</h2>
+        <table>
+            <tr>
+                <th>Время</th>
+                <th>Корпус</th>
+                <th>Аудитория</th>
+            </tr>
+            {% for r in results %}
+            <tr>
+                <td>{{ r.time }}</td>
+                <td>{{ r.corpus }}</td>
+                <td>{{ r.room }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
